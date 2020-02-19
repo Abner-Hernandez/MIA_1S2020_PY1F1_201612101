@@ -295,36 +295,8 @@ namespace yy {
       char dummy1[sizeof(float)];
 
       // size
-      // fit
-      // unit
-      // path
-      // mkdisk
-      // rmdisk
-      // mount
-      // unmount
-      // id
-      // fdisk
-      // deleter
-      // add
-      // rep
-      // name
-      // exec
-      // typer
       // pather
-      // unitl
-      // assign
-      // adj
-      // typep
-      // namep
-      // tpdelete
-      // minus
       // INICIO
-      // ADMINIST
-      // MKPARM
-      // FDISK
-      // SIMBOL
-      // DMOUNT
-      // DREP
       char dummy2[sizeof(string)];
 };
 
@@ -359,21 +331,13 @@ namespace yy {
         TOK_unmount = 265,
         TOK_id = 266,
         TOK_fdisk = 267,
-        TOK_deleter = 268,
+        TOK_delete = 268,
         TOK_add = 269,
         TOK_rep = 270,
         TOK_name = 271,
         TOK_exec = 272,
-        TOK_typer = 273,
-        TOK_pather = 274,
-        TOK_unitl = 275,
-        TOK_assign = 276,
-        TOK_adj = 277,
-        TOK_typep = 278,
-        TOK_namep = 279,
-        TOK_tpdelete = 280,
-        TOK_minus = 281,
-        TOK_numero = 282
+        TOK_pather = 273,
+        TOK_numero = 274
       };
     };
 
@@ -492,95 +456,63 @@ namespace yy {
 
     static inline
     symbol_type
-    make_fit (const string& v, const location_type& l);
+    make_fit (const location_type& l);
 
     static inline
     symbol_type
-    make_unit (const string& v, const location_type& l);
+    make_unit (const location_type& l);
 
     static inline
     symbol_type
-    make_path (const string& v, const location_type& l);
+    make_path (const location_type& l);
 
     static inline
     symbol_type
-    make_mkdisk (const string& v, const location_type& l);
+    make_mkdisk (const location_type& l);
 
     static inline
     symbol_type
-    make_rmdisk (const string& v, const location_type& l);
+    make_rmdisk (const location_type& l);
 
     static inline
     symbol_type
-    make_mount (const string& v, const location_type& l);
+    make_mount (const location_type& l);
 
     static inline
     symbol_type
-    make_unmount (const string& v, const location_type& l);
+    make_unmount (const location_type& l);
 
     static inline
     symbol_type
-    make_id (const string& v, const location_type& l);
+    make_id (const location_type& l);
 
     static inline
     symbol_type
-    make_fdisk (const string& v, const location_type& l);
+    make_fdisk (const location_type& l);
 
     static inline
     symbol_type
-    make_deleter (const string& v, const location_type& l);
+    make_delete (const location_type& l);
 
     static inline
     symbol_type
-    make_add (const string& v, const location_type& l);
+    make_add (const location_type& l);
 
     static inline
     symbol_type
-    make_rep (const string& v, const location_type& l);
+    make_rep (const location_type& l);
 
     static inline
     symbol_type
-    make_name (const string& v, const location_type& l);
+    make_name (const location_type& l);
 
     static inline
     symbol_type
-    make_exec (const string& v, const location_type& l);
-
-    static inline
-    symbol_type
-    make_typer (const string& v, const location_type& l);
+    make_exec (const location_type& l);
 
     static inline
     symbol_type
     make_pather (const string& v, const location_type& l);
-
-    static inline
-    symbol_type
-    make_unitl (const string& v, const location_type& l);
-
-    static inline
-    symbol_type
-    make_assign (const string& v, const location_type& l);
-
-    static inline
-    symbol_type
-    make_adj (const string& v, const location_type& l);
-
-    static inline
-    symbol_type
-    make_typep (const string& v, const location_type& l);
-
-    static inline
-    symbol_type
-    make_namep (const string& v, const location_type& l);
-
-    static inline
-    symbol_type
-    make_tpdelete (const string& v, const location_type& l);
-
-    static inline
-    symbol_type
-    make_minus (const string& v, const location_type& l);
 
     static inline
     symbol_type
@@ -671,7 +603,7 @@ namespace yy {
   // number is the opposite.  If YYTABLE_NINF, syntax error.
   static const unsigned char yytable_[];
 
-  static const signed char yycheck_[];
+  static const unsigned char yycheck_[];
 
   // YYSTOS[STATE-NUM] -- The (internal number of the) accessing
   // symbol of state STATE-NUM.
@@ -791,12 +723,12 @@ namespace yy {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 73,     ///< Last index in yytable_.
-      yynnts_ = 8,  ///< Number of nonterminal symbols.
-      yyfinal_ = 30, ///< Termination state number.
+      yylast_ = 1,     ///< Last index in yytable_.
+      yynnts_ = 2,  ///< Number of nonterminal symbols.
+      yyfinal_ = 3, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
-      yyntokens_ = 28  ///< Number of tokens.
+      yyntokens_ = 20  ///< Number of tokens.
     };
 
 
@@ -840,10 +772,9 @@ namespace yy {
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25,    26,    27
+      15,    16,    17,    18,    19
     };
-    const unsigned int user_token_number_max_ = 282;
+    const unsigned int user_token_number_max_ = 274;
     const token_number_type undef_token_ = 2;
 
     if (static_cast<int>(t) <= yyeof_)
@@ -876,41 +807,13 @@ namespace yy {
   {
       switch (other.type_get ())
     {
-      case 27: // numero
+      case 19: // numero
         value.copy< float > (other.value);
         break;
 
       case 3: // size
-      case 4: // fit
-      case 5: // unit
-      case 6: // path
-      case 7: // mkdisk
-      case 8: // rmdisk
-      case 9: // mount
-      case 10: // unmount
-      case 11: // id
-      case 12: // fdisk
-      case 13: // deleter
-      case 14: // add
-      case 15: // rep
-      case 16: // name
-      case 17: // exec
-      case 18: // typer
-      case 19: // pather
-      case 20: // unitl
-      case 21: // assign
-      case 22: // adj
-      case 23: // typep
-      case 24: // namep
-      case 25: // tpdelete
-      case 26: // minus
-      case 29: // INICIO
-      case 30: // ADMINIST
-      case 31: // MKPARM
-      case 32: // FDISK
-      case 33: // SIMBOL
-      case 34: // DMOUNT
-      case 35: // DREP
+      case 18: // pather
+      case 21: // INICIO
         value.copy< string > (other.value);
         break;
 
@@ -931,41 +834,13 @@ namespace yy {
     (void) v;
       switch (this->type_get ())
     {
-      case 27: // numero
+      case 19: // numero
         value.copy< float > (v);
         break;
 
       case 3: // size
-      case 4: // fit
-      case 5: // unit
-      case 6: // path
-      case 7: // mkdisk
-      case 8: // rmdisk
-      case 9: // mount
-      case 10: // unmount
-      case 11: // id
-      case 12: // fdisk
-      case 13: // deleter
-      case 14: // add
-      case 15: // rep
-      case 16: // name
-      case 17: // exec
-      case 18: // typer
-      case 19: // pather
-      case 20: // unitl
-      case 21: // assign
-      case 22: // adj
-      case 23: // typep
-      case 24: // namep
-      case 25: // tpdelete
-      case 26: // minus
-      case 29: // INICIO
-      case 30: // ADMINIST
-      case 31: // MKPARM
-      case 32: // FDISK
-      case 33: // SIMBOL
-      case 34: // DMOUNT
-      case 35: // DREP
+      case 18: // pather
+      case 21: // INICIO
         value.copy< string > (v);
         break;
 
@@ -1024,41 +899,13 @@ namespace yy {
     // Type destructor.
     switch (yytype)
     {
-      case 27: // numero
+      case 19: // numero
         value.template destroy< float > ();
         break;
 
       case 3: // size
-      case 4: // fit
-      case 5: // unit
-      case 6: // path
-      case 7: // mkdisk
-      case 8: // rmdisk
-      case 9: // mount
-      case 10: // unmount
-      case 11: // id
-      case 12: // fdisk
-      case 13: // deleter
-      case 14: // add
-      case 15: // rep
-      case 16: // name
-      case 17: // exec
-      case 18: // typer
-      case 19: // pather
-      case 20: // unitl
-      case 21: // assign
-      case 22: // adj
-      case 23: // typep
-      case 24: // namep
-      case 25: // tpdelete
-      case 26: // minus
-      case 29: // INICIO
-      case 30: // ADMINIST
-      case 31: // MKPARM
-      case 32: // FDISK
-      case 33: // SIMBOL
-      case 34: // DMOUNT
-      case 35: // DREP
+      case 18: // pather
+      case 21: // INICIO
         value.template destroy< string > ();
         break;
 
@@ -1085,41 +932,13 @@ namespace yy {
     super_type::move(s);
       switch (this->type_get ())
     {
-      case 27: // numero
+      case 19: // numero
         value.move< float > (s.value);
         break;
 
       case 3: // size
-      case 4: // fit
-      case 5: // unit
-      case 6: // path
-      case 7: // mkdisk
-      case 8: // rmdisk
-      case 9: // mount
-      case 10: // unmount
-      case 11: // id
-      case 12: // fdisk
-      case 13: // deleter
-      case 14: // add
-      case 15: // rep
-      case 16: // name
-      case 17: // exec
-      case 18: // typer
-      case 19: // pather
-      case 20: // unitl
-      case 21: // assign
-      case 22: // adj
-      case 23: // typep
-      case 24: // namep
-      case 25: // tpdelete
-      case 26: // minus
-      case 29: // INICIO
-      case 30: // ADMINIST
-      case 31: // MKPARM
-      case 32: // FDISK
-      case 33: // SIMBOL
-      case 34: // DMOUNT
-      case 35: // DREP
+      case 18: // pather
+      case 21: // INICIO
         value.move< string > (s.value);
         break;
 
@@ -1179,8 +998,7 @@ namespace yy {
     yytoken_number_[] =
     {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
-     275,   276,   277,   278,   279,   280,   281,   282
+     265,   266,   267,   268,   269,   270,   271,   272,   273,   274
     };
     return static_cast<token_type> (yytoken_number_[type]);
   }
@@ -1198,141 +1016,93 @@ namespace yy {
   }
 
   analizer_parser::symbol_type
-  analizer_parser::make_fit (const string& v, const location_type& l)
+  analizer_parser::make_fit (const location_type& l)
   {
-    return symbol_type (token::TOK_fit, v, l);
+    return symbol_type (token::TOK_fit, l);
   }
 
   analizer_parser::symbol_type
-  analizer_parser::make_unit (const string& v, const location_type& l)
+  analizer_parser::make_unit (const location_type& l)
   {
-    return symbol_type (token::TOK_unit, v, l);
+    return symbol_type (token::TOK_unit, l);
   }
 
   analizer_parser::symbol_type
-  analizer_parser::make_path (const string& v, const location_type& l)
+  analizer_parser::make_path (const location_type& l)
   {
-    return symbol_type (token::TOK_path, v, l);
+    return symbol_type (token::TOK_path, l);
   }
 
   analizer_parser::symbol_type
-  analizer_parser::make_mkdisk (const string& v, const location_type& l)
+  analizer_parser::make_mkdisk (const location_type& l)
   {
-    return symbol_type (token::TOK_mkdisk, v, l);
+    return symbol_type (token::TOK_mkdisk, l);
   }
 
   analizer_parser::symbol_type
-  analizer_parser::make_rmdisk (const string& v, const location_type& l)
+  analizer_parser::make_rmdisk (const location_type& l)
   {
-    return symbol_type (token::TOK_rmdisk, v, l);
+    return symbol_type (token::TOK_rmdisk, l);
   }
 
   analizer_parser::symbol_type
-  analizer_parser::make_mount (const string& v, const location_type& l)
+  analizer_parser::make_mount (const location_type& l)
   {
-    return symbol_type (token::TOK_mount, v, l);
+    return symbol_type (token::TOK_mount, l);
   }
 
   analizer_parser::symbol_type
-  analizer_parser::make_unmount (const string& v, const location_type& l)
+  analizer_parser::make_unmount (const location_type& l)
   {
-    return symbol_type (token::TOK_unmount, v, l);
+    return symbol_type (token::TOK_unmount, l);
   }
 
   analizer_parser::symbol_type
-  analizer_parser::make_id (const string& v, const location_type& l)
+  analizer_parser::make_id (const location_type& l)
   {
-    return symbol_type (token::TOK_id, v, l);
+    return symbol_type (token::TOK_id, l);
   }
 
   analizer_parser::symbol_type
-  analizer_parser::make_fdisk (const string& v, const location_type& l)
+  analizer_parser::make_fdisk (const location_type& l)
   {
-    return symbol_type (token::TOK_fdisk, v, l);
+    return symbol_type (token::TOK_fdisk, l);
   }
 
   analizer_parser::symbol_type
-  analizer_parser::make_deleter (const string& v, const location_type& l)
+  analizer_parser::make_delete (const location_type& l)
   {
-    return symbol_type (token::TOK_deleter, v, l);
+    return symbol_type (token::TOK_delete, l);
   }
 
   analizer_parser::symbol_type
-  analizer_parser::make_add (const string& v, const location_type& l)
+  analizer_parser::make_add (const location_type& l)
   {
-    return symbol_type (token::TOK_add, v, l);
+    return symbol_type (token::TOK_add, l);
   }
 
   analizer_parser::symbol_type
-  analizer_parser::make_rep (const string& v, const location_type& l)
+  analizer_parser::make_rep (const location_type& l)
   {
-    return symbol_type (token::TOK_rep, v, l);
+    return symbol_type (token::TOK_rep, l);
   }
 
   analizer_parser::symbol_type
-  analizer_parser::make_name (const string& v, const location_type& l)
+  analizer_parser::make_name (const location_type& l)
   {
-    return symbol_type (token::TOK_name, v, l);
+    return symbol_type (token::TOK_name, l);
   }
 
   analizer_parser::symbol_type
-  analizer_parser::make_exec (const string& v, const location_type& l)
+  analizer_parser::make_exec (const location_type& l)
   {
-    return symbol_type (token::TOK_exec, v, l);
-  }
-
-  analizer_parser::symbol_type
-  analizer_parser::make_typer (const string& v, const location_type& l)
-  {
-    return symbol_type (token::TOK_typer, v, l);
+    return symbol_type (token::TOK_exec, l);
   }
 
   analizer_parser::symbol_type
   analizer_parser::make_pather (const string& v, const location_type& l)
   {
     return symbol_type (token::TOK_pather, v, l);
-  }
-
-  analizer_parser::symbol_type
-  analizer_parser::make_unitl (const string& v, const location_type& l)
-  {
-    return symbol_type (token::TOK_unitl, v, l);
-  }
-
-  analizer_parser::symbol_type
-  analizer_parser::make_assign (const string& v, const location_type& l)
-  {
-    return symbol_type (token::TOK_assign, v, l);
-  }
-
-  analizer_parser::symbol_type
-  analizer_parser::make_adj (const string& v, const location_type& l)
-  {
-    return symbol_type (token::TOK_adj, v, l);
-  }
-
-  analizer_parser::symbol_type
-  analizer_parser::make_typep (const string& v, const location_type& l)
-  {
-    return symbol_type (token::TOK_typep, v, l);
-  }
-
-  analizer_parser::symbol_type
-  analizer_parser::make_namep (const string& v, const location_type& l)
-  {
-    return symbol_type (token::TOK_namep, v, l);
-  }
-
-  analizer_parser::symbol_type
-  analizer_parser::make_tpdelete (const string& v, const location_type& l)
-  {
-    return symbol_type (token::TOK_tpdelete, v, l);
-  }
-
-  analizer_parser::symbol_type
-  analizer_parser::make_minus (const string& v, const location_type& l)
-  {
-    return symbol_type (token::TOK_minus, v, l);
   }
 
   analizer_parser::symbol_type
@@ -1344,7 +1114,7 @@ namespace yy {
 
 #line 6 "parser.yy" // lalr1.cc:377
 } // yy
-#line 1348 "parser.tab.hh" // lalr1.cc:377
+#line 1118 "parser.tab.hh" // lalr1.cc:377
 
 
 

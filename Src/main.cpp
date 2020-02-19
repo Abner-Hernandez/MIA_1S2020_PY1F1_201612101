@@ -4,20 +4,13 @@ using namespace std;
 
 int main()
 {
-    string entry = "";
+    string entry = "/home/battleab/analizer/calificacion.sh";
     analizer_driver driver;
-    while (true) {
-        getline(cin, entry);
-        if(entry.compare("exit") == 0)
-            break;
-        else
-        {
-            if(driver.parse(entry)){
-              printf("La entrada es incorrecta\n");
-            }else{
-              printf("La entrada es correcta\n");
-            }
-        }
+    if(driver.parse(entry)){
+      printf("La entrada es incorrecta\n");
+    }else{
+      printf("La entrada es correcta\n");
+      //printf("Resultado = %f\n",driver.resultado);
     }
     return 0;
 }

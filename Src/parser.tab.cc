@@ -54,40 +54,7 @@
 #include "driver.h"
 #include <iostream>
 
-string fit = "notdefined";
-string unit = "notdefined";
-string path = "notdefined";
-string type = "notdefined";
-string del = "notdefined";
-string name = "notdefined";
-string id = "notdefined";
-int add = 0;
-int size = 0;
-
-void create_disk()
-{
-    if(path.compare("notdefined") != 0 && size > 0)
-    {
-        cout << path;
-
-
-        try {
-            FILE *fileC = fopen(path.c_str(), "w+b");
-            if (fileC==NULL)
-            {
-                cout << "\nProblema para crear el archivo\n";
-            }
-            char letra[1024];
-            fwrite(&letra, sizeof(char), 1, fileC);
-            fclose(fileC);
-        } catch( std::exception& e) {
-            std::cout << " a standard exception was caught, with message '" << e.what() << "'\n";
-        }
-    }
-}
-
-
-#line 91 "parser.tab.cc" // lalr1.cc:413
+#line 58 "parser.tab.cc" // lalr1.cc:413
 
 
 #ifndef YY_
@@ -173,7 +140,7 @@ void create_disk()
 
 #line 6 "parser.yy" // lalr1.cc:479
 namespace yy {
-#line 177 "parser.tab.cc" // lalr1.cc:479
+#line 144 "parser.tab.cc" // lalr1.cc:479
 
   /* Return YYSTR after stripping away unnecessary quotes and
      backslashes, so that it's suitable for yyerror.  The heuristic is
@@ -285,41 +252,13 @@ namespace yy {
   {
       switch (that.type_get ())
     {
-      case 27: // numero
+      case 19: // numero
         value.move< float > (that.value);
         break;
 
       case 3: // size
-      case 4: // fit
-      case 5: // unit
-      case 6: // path
-      case 7: // mkdisk
-      case 8: // rmdisk
-      case 9: // mount
-      case 10: // unmount
-      case 11: // id
-      case 12: // fdisk
-      case 13: // deleter
-      case 14: // add
-      case 15: // rep
-      case 16: // name
-      case 17: // exec
-      case 18: // typer
-      case 19: // pather
-      case 20: // unitl
-      case 21: // assign
-      case 22: // adj
-      case 23: // typep
-      case 24: // namep
-      case 25: // tpdelete
-      case 26: // minus
-      case 29: // INICIO
-      case 30: // ADMINIST
-      case 31: // MKPARM
-      case 32: // FDISK
-      case 33: // SIMBOL
-      case 34: // DMOUNT
-      case 35: // DREP
+      case 18: // pather
+      case 21: // INICIO
         value.move< string > (that.value);
         break;
 
@@ -338,41 +277,13 @@ namespace yy {
     state = that.state;
       switch (that.type_get ())
     {
-      case 27: // numero
+      case 19: // numero
         value.copy< float > (that.value);
         break;
 
       case 3: // size
-      case 4: // fit
-      case 5: // unit
-      case 6: // path
-      case 7: // mkdisk
-      case 8: // rmdisk
-      case 9: // mount
-      case 10: // unmount
-      case 11: // id
-      case 12: // fdisk
-      case 13: // deleter
-      case 14: // add
-      case 15: // rep
-      case 16: // name
-      case 17: // exec
-      case 18: // typer
-      case 19: // pather
-      case 20: // unitl
-      case 21: // assign
-      case 22: // adj
-      case 23: // typep
-      case 24: // namep
-      case 25: // tpdelete
-      case 26: // minus
-      case 29: // INICIO
-      case 30: // ADMINIST
-      case 31: // MKPARM
-      case 32: // FDISK
-      case 33: // SIMBOL
-      case 34: // DMOUNT
-      case 35: // DREP
+      case 18: // pather
+      case 21: // INICIO
         value.copy< string > (that.value);
         break;
 
@@ -414,226 +325,30 @@ namespace yy {
     {
             case 3: // size
 
-#line 97 "parser.yy" // lalr1.cc:636
+#line 50 "parser.yy" // lalr1.cc:636
         { yyoutput << yysym.value.template as< string > (); }
-#line 420 "parser.tab.cc" // lalr1.cc:636
+#line 331 "parser.tab.cc" // lalr1.cc:636
         break;
 
-      case 4: // fit
+      case 18: // pather
 
-#line 97 "parser.yy" // lalr1.cc:636
+#line 50 "parser.yy" // lalr1.cc:636
         { yyoutput << yysym.value.template as< string > (); }
-#line 427 "parser.tab.cc" // lalr1.cc:636
+#line 338 "parser.tab.cc" // lalr1.cc:636
         break;
 
-      case 5: // unit
+      case 19: // numero
 
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 434 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 6: // path
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 441 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 7: // mkdisk
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 448 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 8: // rmdisk
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 455 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 9: // mount
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 462 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 10: // unmount
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 469 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 11: // id
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 476 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 12: // fdisk
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 483 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 13: // deleter
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 490 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 14: // add
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 497 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 15: // rep
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 504 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 16: // name
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 511 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 17: // exec
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 518 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 18: // typer
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 525 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 19: // pather
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 532 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 20: // unitl
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 539 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 21: // assign
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 546 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 22: // adj
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 553 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 23: // typep
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 560 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 24: // namep
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 567 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 25: // tpdelete
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 574 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 26: // minus
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 581 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 27: // numero
-
-#line 97 "parser.yy" // lalr1.cc:636
+#line 50 "parser.yy" // lalr1.cc:636
         { yyoutput << yysym.value.template as< float > (); }
-#line 588 "parser.tab.cc" // lalr1.cc:636
+#line 345 "parser.tab.cc" // lalr1.cc:636
         break;
 
-      case 29: // INICIO
+      case 21: // INICIO
 
-#line 97 "parser.yy" // lalr1.cc:636
+#line 50 "parser.yy" // lalr1.cc:636
         { yyoutput << yysym.value.template as< string > (); }
-#line 595 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 30: // ADMINIST
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 602 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 31: // MKPARM
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 609 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 32: // FDISK
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 616 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 33: // SIMBOL
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 623 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 34: // DMOUNT
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 630 "parser.tab.cc" // lalr1.cc:636
-        break;
-
-      case 35: // DREP
-
-#line 97 "parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< string > (); }
-#line 637 "parser.tab.cc" // lalr1.cc:636
+#line 352 "parser.tab.cc" // lalr1.cc:636
         break;
 
 
@@ -833,41 +548,13 @@ namespace yy {
          when using variants.  */
         switch (yyr1_[yyn])
     {
-      case 27: // numero
+      case 19: // numero
         yylhs.value.build< float > ();
         break;
 
       case 3: // size
-      case 4: // fit
-      case 5: // unit
-      case 6: // path
-      case 7: // mkdisk
-      case 8: // rmdisk
-      case 9: // mount
-      case 10: // unmount
-      case 11: // id
-      case 12: // fdisk
-      case 13: // deleter
-      case 14: // add
-      case 15: // rep
-      case 16: // name
-      case 17: // exec
-      case 18: // typer
-      case 19: // pather
-      case 20: // unitl
-      case 21: // assign
-      case 22: // adj
-      case 23: // typep
-      case 24: // namep
-      case 25: // tpdelete
-      case 26: // minus
-      case 29: // INICIO
-      case 30: // ADMINIST
-      case 31: // MKPARM
-      case 32: // FDISK
-      case 33: // SIMBOL
-      case 34: // DMOUNT
-      case 35: // DREP
+      case 18: // pather
+      case 21: // INICIO
         yylhs.value.build< string > ();
         break;
 
@@ -889,49 +576,13 @@ namespace yy {
           switch (yyn)
             {
   case 2:
-#line 101 "parser.yy" // lalr1.cc:859
-    { std::cout << yystack_[0].value.as< string > () << '\n';  }
-#line 895 "parser.tab.cc" // lalr1.cc:859
-    break;
-
-  case 3:
-#line 103 "parser.yy" // lalr1.cc:859
-    { create_disk();}
-#line 901 "parser.tab.cc" // lalr1.cc:859
-    break;
-
-  case 10:
-#line 111 "parser.yy" // lalr1.cc:859
-    { size = yystack_[0].value.as< float > ();}
-#line 907 "parser.tab.cc" // lalr1.cc:859
-    break;
-
-  case 11:
-#line 112 "parser.yy" // lalr1.cc:859
-    { fit = yystack_[0].value.as< string > ();}
-#line 913 "parser.tab.cc" // lalr1.cc:859
-    break;
-
-  case 12:
-#line 113 "parser.yy" // lalr1.cc:859
-    { unit = yystack_[0].value.as< string > ();}
-#line 919 "parser.tab.cc" // lalr1.cc:859
-    break;
-
-  case 13:
-#line 114 "parser.yy" // lalr1.cc:859
-    { path = yystack_[0].value.as< string > ();}
-#line 925 "parser.tab.cc" // lalr1.cc:859
-    break;
-
-  case 14:
-#line 115 "parser.yy" // lalr1.cc:859
-    { yylhs.value.as< string > () = "empty";}
-#line 931 "parser.tab.cc" // lalr1.cc:859
+#line 54 "parser.yy" // lalr1.cc:859
+    { std::cout << yystack_[0].value.as< string > () << '\n'; }
+#line 582 "parser.tab.cc" // lalr1.cc:859
     break;
 
 
-#line 935 "parser.tab.cc" // lalr1.cc:859
+#line 586 "parser.tab.cc" // lalr1.cc:859
             default:
               break;
             }
@@ -1186,101 +837,62 @@ namespace yy {
   }
 
 
-  const signed char analizer_parser::yypact_ninf_ = -26;
+  const signed char analizer_parser::yypact_ninf_ = -4;
 
   const signed char analizer_parser::yytable_ninf_ = -1;
 
   const signed char
   analizer_parser::yypact_[] =
   {
-      18,    37,     2,    -4,     7,     1,     5,     4,    20,   -26,
-       8,    10,    11,    15,    37,    16,    17,    27,    -4,    28,
-      29,    25,    31,    33,   -26,     1,    34,   -26,     5,    35,
-     -26,    30,    36,    39,    41,    37,    42,    43,    40,   -26,
-      44,    38,   -26,    45,    46,    48,     1,    49,     5,    47,
-     -26,   -26,   -26,   -26,    37,   -26,   -26,   -26,   -26,   -26,
-     -26,   -26,   -26,     1,   -26,   -26,   -26,   -26,     1,     1,
-       1,     1,   -26
+      -3,    -4,     1,    -4
   };
 
   const unsigned char
   analizer_parser::yydefact_[] =
   {
-       0,    14,     0,     0,     0,    14,     0,     0,     0,     2,
-       0,     0,     0,     0,    14,     0,     0,     0,     0,     0,
-       0,    21,     0,     0,    15,    14,     0,    24,     0,     0,
-       1,     0,     0,     0,     0,    14,     0,     0,     0,     6,
-       0,     0,    20,     0,     0,     0,    14,     0,     0,     0,
-      10,    11,    12,    13,    14,     4,    22,    23,     7,    17,
-      19,    18,    16,    14,    25,     8,     9,     3,    14,    14,
-      14,    14,     5
+       0,     2,     0,     1
   };
 
   const signed char
   analizer_parser::yypgoto_[] =
   {
-     -26,   -26,   -26,    -1,   -24,   -26,     6,   -25
+      -4,    -4
   };
 
   const signed char
   analizer_parser::yydefgoto_[] =
   {
-      -1,     8,     9,    24,    25,    43,    27,    28
+      -1,     2
   };
 
   const unsigned char
   analizer_parser::yytable_[] =
   {
-      14,    46,    16,    48,    10,    11,    12,    13,    15,    18,
-      29,    16,    17,    35,    20,    21,    26,    22,    19,    23,
-      30,    17,    63,    65,    39,     1,     2,     3,     4,    31,
-       5,    32,    33,     6,    54,     7,    34,    36,    37,    68,
-      10,    11,    12,    13,    69,    70,    71,    72,    38,    40,
-      41,    42,    44,    67,    45,    47,    49,    50,    51,    52,
-      53,    55,    56,    59,    57,     0,    66,     0,    58,     0,
-      61,    62,    60,    64
+       1,     3
   };
 
-  const signed char
+  const unsigned char
   analizer_parser::yycheck_[] =
   {
-       1,    25,     6,    28,     3,     4,     5,     6,     6,     3,
-       6,     6,    16,    14,    13,    14,    11,    16,    11,    18,
-       0,    16,    46,    48,    18,     7,     8,     9,    10,    21,
-      12,    21,    21,    15,    35,    17,    21,    21,    21,    63,
-       3,     4,     5,     6,    68,    69,    70,    71,    21,    21,
-      21,    26,    21,    54,    21,    21,    21,    27,    22,    20,
-      19,    19,    19,    25,    24,    -1,    19,    -1,    24,    -1,
-      24,    23,    27,    24
+       3,     0
   };
 
   const unsigned char
   analizer_parser::yystos_[] =
   {
-       0,     7,     8,     9,    10,    12,    15,    17,    29,    30,
-       3,     4,     5,     6,    31,     6,     6,    16,    34,    11,
-      13,    14,    16,    18,    31,    32,    11,    34,    35,     6,
-       0,    21,    21,    21,    21,    31,    21,    21,    21,    34,
-      21,    21,    26,    33,    21,    21,    32,    21,    35,    21,
-      27,    22,    20,    19,    31,    19,    19,    24,    24,    25,
-      27,    24,    23,    32,    24,    35,    19,    31,    32,    32,
-      32,    32,    32
+       0,     3,    21,     0
   };
 
   const unsigned char
   analizer_parser::yyr1_[] =
   {
-       0,    28,    29,    30,    30,    30,    30,    30,    30,    30,
-      31,    31,    31,    31,    31,    32,    32,    32,    32,    32,
-      33,    33,    34,    34,    35,    35
+       0,    20,    21
   };
 
   const unsigned char
   analizer_parser::yyr2_[] =
   {
-       0,     2,     1,     5,     4,     9,     3,     4,     4,     4,
-       3,     3,     3,     3,     0,     1,     3,     3,     3,     3,
-       1,     0,     3,     3,     1,     3
+       0,     2,     1
   };
 
 
@@ -1291,19 +903,15 @@ namespace yy {
   const analizer_parser::yytname_[] =
   {
   "\"eof\"", "error", "$undefined", "size", "fit", "unit", "path",
-  "mkdisk", "rmdisk", "mount", "unmount", "id", "fdisk", "deleter", "add",
-  "rep", "name", "exec", "typer", "pather", "unitl", "assign", "adj",
-  "typep", "namep", "tpdelete", "minus", "numero", "$accept", "INICIO",
-  "ADMINIST", "MKPARM", "FDISK", "SIMBOL", "DMOUNT", "DREP", YY_NULLPTR
+  "mkdisk", "rmdisk", "mount", "unmount", "id", "fdisk", "delete", "add",
+  "rep", "name", "exec", "pather", "numero", "$accept", "INICIO", YY_NULLPTR
   };
 
 #if YYDEBUG
   const unsigned char
   analizer_parser::yyrline_[] =
   {
-       0,   101,   101,   103,   104,   105,   106,   107,   108,   109,
-     111,   112,   113,   114,   115,   117,   118,   119,   120,   121,
-     123,   124,   126,   127,   129,   130
+       0,    54,    54
   };
 
   // Print the state stack on the debug stream.
@@ -1338,11 +946,10 @@ namespace yy {
 
 #line 6 "parser.yy" // lalr1.cc:1167
 } // yy
-#line 1342 "parser.tab.cc" // lalr1.cc:1167
-#line 132 "parser.yy" // lalr1.cc:1168
-
+#line 950 "parser.tab.cc" // lalr1.cc:1167
+#line 56 "parser.yy" // lalr1.cc:1168
 
 void yy::analizer_parser::error(const location_type& lugar, const std::string& lexema)
 {
-  std::cout << "Error Sintactico " << lexema << " var " << std::endl;
+  std::cout << "Error Sintactico " << lexema << std::endl;
 }
