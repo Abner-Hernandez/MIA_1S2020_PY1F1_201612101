@@ -6,11 +6,11 @@ CONFIG -= qt
 SOURCES += \
         driver.cpp \
         main.cpp \
+        methods.cpp \
         parser.tab.cc \
         scanner.cpp
 
 DISTFILES += \
-    Archivos_PY1F1.pro.user \
     entrada.txt
 
 HEADERS += \

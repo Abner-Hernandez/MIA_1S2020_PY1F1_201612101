@@ -12,7 +12,7 @@ public:
   float resultado;
   void iniciarScanner();
   void terminarScanner();
-  
+
   int parse(const std::string& archivo);
   
   std::string file;

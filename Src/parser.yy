@@ -1,5 +1,4 @@
 %skeleton "lalr1.cc" /* -*- C++ -*- */
-%require "3.0.2"
 %defines
 %define parser_class_name {analizer_parser}
 %define api.token.constructor
@@ -21,40 +20,93 @@ class analizer_driver;
 {
 #include "driver.h"
 #include <iostream>
+#include "methods.cpp"
 }
 %define api.token.prefix {TOK_}
 
 //Listadode Terminales
 %token <string> size
-%token fit
-%token unit
-%token path
-%token mkdisk
-%token rmdisk
-%token mount
-%token unmount
-%token id
-%token fdisk
-%token delete
-%token add
-%token rep
-%token name
-%token exec
+%token <string> fit
+%token <string> unit
+%token <string> path
+%token <string> mkdisk
+%token <string> rmdisk
+%token <string> mount
+%token <string> unmount
+%token <string> id
+%token <string> fdisk
+%token <string> deleter
+%token <string> add
+%token <string> rep
+%token <string> name
+%token <string> exec
+%token <string> typer
 %token <string> pather
+%token <char> unitl
+%token <string> assign
+%token <string> adj
+%token <char> typep
+%token <string> idvda
+%token <string> tpdelete
+%token <string> minus
+%token <string> npart
+%token <string> pathimg
 %token <float> numero
 %token FIN 0 "eof"
 
 //Listado de No Terminales
 %type <string> INICIO
+%type <string> ADMINIST
+%type <string> MKPARM
+%type <string> FDISK
+%type <string> DMOUNT
+%type <string> DREP
+%type <string> SIMBOL
 
 %printer { yyoutput << $$; } <*>;
 %%
 %start INICIO;
 
-INICIO : pather { std::cout << $1 << '\n'; };
-   
+INICIO : ADMINIST { std::cout << $1 << '\n';  };
+
+ADMINIST :  mkdisk MKPARM MKPARM MKPARM MKPARM                          { mkdisk();}
+            |rmdisk path assign pather                                  { rmdisk();}
+            |fdisk FDISK FDISK FDISK FDISK FDISK FDISK FDISK           { fdisk();}
+            |mount DMOUNT DMOUNT                                        { mount();}
+            |unmount id assign idvda                                    { unmount();}
+            |rep DREP DREP DREP                                         { rep();}
+            |exec path assign pather;
+
+MKPARM :    size assign numero                                          { size = $3;}
+            |fit assign adj                                             { fit = $3;}
+            |unit assign unitl                                          { unit = $3;}
+            |path assign pather                                         { path = $3;}
+            |%empty                                                     { $$ = "empty";};
+
+FDISK :     size assign numero                                          { size = $3;}
+            |fit assign adj                                             { fit = $3;}
+            |unit assign unitl                                          { unit = $3;}
+            |path assign pather                                         { path = $3;}
+            |typer assign typep                                         { type = $3;}
+            |deleter assign tpdelete                                    { tdelete = $3;}
+            |add assign SIMBOL numero                                   { add = $4;}
+            |name assign npart                                          { name = $3;}
+            |%empty                                                     { $$ = "empty";};
+
+
+SIMBOL :    minus                                                       { sign = "menos";}
+            |%empty                                                     { sign = "mas";};
+
+DMOUNT :    path assign pather                                          { path = $3;}
+            |name assign npart                                          { name = $3;};
+
+DREP :      path assign pathimg                                          { path = $3;}
+            |name assign npart                                          { name = $3;}
+            |id assign idvda                                            { id = $3;};
+
 %%
+
 void yy::analizer_parser::error(const location_type& lugar, const std::string& lexema)
 {
-  std::cout << "Error Sintactico " << lexema << std::endl;
+  std::cout << "Error Sintactico " << lexema << " var " << std::endl;
 }
