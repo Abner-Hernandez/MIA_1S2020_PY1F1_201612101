@@ -50,7 +50,6 @@ class analizer_driver;
 %token <string> tpdelete
 %token <string> minus
 %token <string> npart
-%token <string> pathimg
 %token <float> numero
 %token FIN 0 "eof"
 
@@ -75,7 +74,7 @@ ADMINIST :  mkdisk MKPARM MKPARM MKPARM MKPARM                          { mkdisk
             |mount DMOUNT DMOUNT                                        { mount();}
             |unmount id assign idvda                                    { unmount();}
             |rep DREP DREP DREP                                         { rep();}
-            |exec path assign pather                                    { path = $4;};
+            |exec pather                                                { path = $2; exec = true;};
 
 MKPARM :    size assign numero                                          { size = $3;}
             |fit assign adj                                             { fit = $3;}
@@ -100,7 +99,7 @@ SIMBOL :    minus                                                       { sign =
 DMOUNT :    path assign pather                                          { path = $3;}
             |name assign npart                                          { name = $3;};
 
-DREP :      path assign pathimg                                          { path = $3;}
+DREP :      path assign pather                                          { path = $3;}
             |name assign npart                                          { name = $3;}
             |id assign idvda                                            { id = $3;};
 

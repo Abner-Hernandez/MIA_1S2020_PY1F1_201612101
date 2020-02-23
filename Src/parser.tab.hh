@@ -321,7 +321,6 @@ namespace yy {
       // tpdelete
       // minus
       // npart
-      // pathimg
       // INICIO
       // ADMINIST
       // MKPARM
@@ -378,8 +377,7 @@ namespace yy {
         TOK_tpdelete = 280,
         TOK_minus = 281,
         TOK_npart = 282,
-        TOK_pathimg = 283,
-        TOK_numero = 284
+        TOK_numero = 283
       };
     };
 
@@ -596,10 +594,6 @@ namespace yy {
 
     static inline
     symbol_type
-    make_pathimg (const string& v, const location_type& l);
-
-    static inline
-    symbol_type
     make_numero (const float& v, const location_type& l);
 
 
@@ -807,12 +801,12 @@ namespace yy {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 86,     ///< Last index in yytable_.
+      yylast_ = 85,     ///< Last index in yytable_.
       yynnts_ = 8,  ///< Number of nonterminal symbols.
       yyfinal_ = 34, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
-      yyntokens_ = 30  ///< Number of tokens.
+      yyntokens_ = 29  ///< Number of tokens.
     };
 
 
@@ -857,9 +851,9 @@ namespace yy {
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25,    26,    27,    28,    29
+      25,    26,    27,    28
     };
-    const unsigned int user_token_number_max_ = 284;
+    const unsigned int user_token_number_max_ = 283;
     const token_number_type undef_token_ = 2;
 
     if (static_cast<int>(t) <= yyeof_)
@@ -897,7 +891,7 @@ namespace yy {
         value.copy< char > (other.value);
         break;
 
-      case 29: // numero
+      case 28: // numero
         value.copy< float > (other.value);
         break;
 
@@ -924,14 +918,13 @@ namespace yy {
       case 25: // tpdelete
       case 26: // minus
       case 27: // npart
-      case 28: // pathimg
-      case 31: // INICIO
-      case 32: // ADMINIST
-      case 33: // MKPARM
-      case 34: // FDISK
-      case 35: // SIMBOL
-      case 36: // DMOUNT
-      case 37: // DREP
+      case 30: // INICIO
+      case 31: // ADMINIST
+      case 32: // MKPARM
+      case 33: // FDISK
+      case 34: // SIMBOL
+      case 35: // DMOUNT
+      case 36: // DREP
         value.copy< string > (other.value);
         break;
 
@@ -957,7 +950,7 @@ namespace yy {
         value.copy< char > (v);
         break;
 
-      case 29: // numero
+      case 28: // numero
         value.copy< float > (v);
         break;
 
@@ -984,14 +977,13 @@ namespace yy {
       case 25: // tpdelete
       case 26: // minus
       case 27: // npart
-      case 28: // pathimg
-      case 31: // INICIO
-      case 32: // ADMINIST
-      case 33: // MKPARM
-      case 34: // FDISK
-      case 35: // SIMBOL
-      case 36: // DMOUNT
-      case 37: // DREP
+      case 30: // INICIO
+      case 31: // ADMINIST
+      case 32: // MKPARM
+      case 33: // FDISK
+      case 34: // SIMBOL
+      case 35: // DMOUNT
+      case 36: // DREP
         value.copy< string > (v);
         break;
 
@@ -1062,7 +1054,7 @@ namespace yy {
         value.template destroy< char > ();
         break;
 
-      case 29: // numero
+      case 28: // numero
         value.template destroy< float > ();
         break;
 
@@ -1089,14 +1081,13 @@ namespace yy {
       case 25: // tpdelete
       case 26: // minus
       case 27: // npart
-      case 28: // pathimg
-      case 31: // INICIO
-      case 32: // ADMINIST
-      case 33: // MKPARM
-      case 34: // FDISK
-      case 35: // SIMBOL
-      case 36: // DMOUNT
-      case 37: // DREP
+      case 30: // INICIO
+      case 31: // ADMINIST
+      case 32: // MKPARM
+      case 33: // FDISK
+      case 34: // SIMBOL
+      case 35: // DMOUNT
+      case 36: // DREP
         value.template destroy< string > ();
         break;
 
@@ -1128,7 +1119,7 @@ namespace yy {
         value.move< char > (s.value);
         break;
 
-      case 29: // numero
+      case 28: // numero
         value.move< float > (s.value);
         break;
 
@@ -1155,14 +1146,13 @@ namespace yy {
       case 25: // tpdelete
       case 26: // minus
       case 27: // npart
-      case 28: // pathimg
-      case 31: // INICIO
-      case 32: // ADMINIST
-      case 33: // MKPARM
-      case 34: // FDISK
-      case 35: // SIMBOL
-      case 36: // DMOUNT
-      case 37: // DREP
+      case 30: // INICIO
+      case 31: // ADMINIST
+      case 32: // MKPARM
+      case 33: // FDISK
+      case 34: // SIMBOL
+      case 35: // DMOUNT
+      case 36: // DREP
         value.move< string > (s.value);
         break;
 
@@ -1223,7 +1213,7 @@ namespace yy {
     {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
-     275,   276,   277,   278,   279,   280,   281,   282,   283,   284
+     275,   276,   277,   278,   279,   280,   281,   282,   283
     };
     return static_cast<token_type> (yytoken_number_[type]);
   }
@@ -1385,12 +1375,6 @@ namespace yy {
   }
 
   analizer_parser::symbol_type
-  analizer_parser::make_pathimg (const string& v, const location_type& l)
-  {
-    return symbol_type (token::TOK_pathimg, v, l);
-  }
-
-  analizer_parser::symbol_type
   analizer_parser::make_numero (const float& v, const location_type& l)
   {
     return symbol_type (token::TOK_numero, v, l);
@@ -1399,7 +1383,7 @@ namespace yy {
 
 #line 5 "parser.yy" // lalr1.cc:377
 } // yy
-#line 1403 "parser.tab.hh" // lalr1.cc:377
+#line 1387 "parser.tab.hh" // lalr1.cc:377
 
 
 

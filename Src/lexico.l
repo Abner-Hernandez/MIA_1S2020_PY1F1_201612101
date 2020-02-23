@@ -19,8 +19,7 @@ TYPEP ("P"|"E"|"L")
 TPDELETE ("FAST"|"FULL")
 COMENTARIO "/*"[^'*']*"*/"
 
-PATHER [\"]?([/][^/]+)+".disk"+[\"]?
-PATHERIMG [\"]?([/][^/]+)+".png"+[\"]?
+PATHER [\"]?([/][^/]+)+"."{LETRA}+[\"]?
 VDA ["vd"]{LETRA}{DIGITO}
 PARTNAME [\"]?({LETRA}|{DIGITO})*[\"]?
 NUMERO {DIGITO}+
@@ -54,7 +53,6 @@ DELIMITADOR [ \t\r\f\n]+
 {VDA}           {return yy::analizer_parser::make_idvda(yytext, loc);}
 {TPDELETE}      {return yy::analizer_parser::make_tpdelete(yytext, loc);}
 {PARTNAME}      {return yy::analizer_parser::make_npart(yytext, loc);}
-{PATHERIMG}      {return yy::analizer_parser::make_pathimg(yytext, loc);}
 
 {DELIMITADOR}   {}
 .               {printf("ERROR LEXICO %s\n",yytext);}

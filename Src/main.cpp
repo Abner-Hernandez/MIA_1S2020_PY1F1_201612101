@@ -29,8 +29,9 @@ int main()
                     {
                         string line;
                         while (getline(file, line)) {
-                            if(!driver.parse(line))
-                              printf("La entrada es correcta\n");
+                            if(line.compare("") != 0)
+                                if(!driver.parse(line))
+                                    printf("La entrada es correcta\n");
                         }
                         file.close();
                     }

@@ -205,11 +205,8 @@ void mkdisk()   // Crear discos
             att.mbr_tam = size*tam;
             time_t tiempo = time(0);
             struct tm *tiem = localtime(&tiempo);
-            //tiempo=time(NULL);
             strftime(att.mbr_fecha_creacion, 18, "%d/%m/%Y %H:%M", tiem);
 
-
-            //att.mbr_fecha_creacion = "123456789127";
             att.mbr_disk_signature = rand();;
             if(fit.compare("notdefined") == 0)
                 att.disk_fit = 'f';
@@ -268,6 +265,9 @@ void fdisk()
     //cout << path << name << fit << unit << "size: "<< size ;
     if(path != "notdefined" && name != "notdefined")
     {
+        if(sign.compare("menos"))
+            add = add*-1;
+
         if(unit == '*' || tolower(unit) == 'k')
         {
             size = size*1024;
