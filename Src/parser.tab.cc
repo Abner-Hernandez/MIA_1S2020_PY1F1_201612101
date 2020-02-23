@@ -927,134 +927,140 @@ namespace yy {
 #line 928 "parser.tab.cc" // lalr1.cc:859
     break;
 
+  case 9:
+#line 78 "parser.yy" // lalr1.cc:859
+    { path = yystack_[0].value.as< string > ();}
+#line 934 "parser.tab.cc" // lalr1.cc:859
+    break;
+
   case 10:
 #line 80 "parser.yy" // lalr1.cc:859
     { size = yystack_[0].value.as< float > ();}
-#line 934 "parser.tab.cc" // lalr1.cc:859
+#line 940 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 11:
 #line 81 "parser.yy" // lalr1.cc:859
     { fit = yystack_[0].value.as< string > ();}
-#line 940 "parser.tab.cc" // lalr1.cc:859
+#line 946 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 12:
 #line 82 "parser.yy" // lalr1.cc:859
     { unit = yystack_[0].value.as< char > ();}
-#line 946 "parser.tab.cc" // lalr1.cc:859
+#line 952 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 13:
 #line 83 "parser.yy" // lalr1.cc:859
     { path = yystack_[0].value.as< string > ();}
-#line 952 "parser.tab.cc" // lalr1.cc:859
+#line 958 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 14:
 #line 84 "parser.yy" // lalr1.cc:859
     { yylhs.value.as< string > () = "empty";}
-#line 958 "parser.tab.cc" // lalr1.cc:859
+#line 964 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 15:
 #line 86 "parser.yy" // lalr1.cc:859
     { size = yystack_[0].value.as< float > ();}
-#line 964 "parser.tab.cc" // lalr1.cc:859
+#line 970 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 16:
 #line 87 "parser.yy" // lalr1.cc:859
     { fit = yystack_[0].value.as< string > ();}
-#line 970 "parser.tab.cc" // lalr1.cc:859
+#line 976 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 17:
 #line 88 "parser.yy" // lalr1.cc:859
     { unit = yystack_[0].value.as< char > ();}
-#line 976 "parser.tab.cc" // lalr1.cc:859
+#line 982 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 18:
 #line 89 "parser.yy" // lalr1.cc:859
     { path = yystack_[0].value.as< string > ();}
-#line 982 "parser.tab.cc" // lalr1.cc:859
+#line 988 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 19:
 #line 90 "parser.yy" // lalr1.cc:859
     { type = yystack_[0].value.as< char > ();}
-#line 988 "parser.tab.cc" // lalr1.cc:859
+#line 994 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 20:
 #line 91 "parser.yy" // lalr1.cc:859
     { tdelete = yystack_[0].value.as< string > ();}
-#line 994 "parser.tab.cc" // lalr1.cc:859
+#line 1000 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 21:
 #line 92 "parser.yy" // lalr1.cc:859
     { add = yystack_[0].value.as< float > ();}
-#line 1000 "parser.tab.cc" // lalr1.cc:859
+#line 1006 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 22:
 #line 93 "parser.yy" // lalr1.cc:859
     { name = yystack_[0].value.as< string > ();}
-#line 1006 "parser.tab.cc" // lalr1.cc:859
+#line 1012 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 23:
 #line 94 "parser.yy" // lalr1.cc:859
     { yylhs.value.as< string > () = "empty";}
-#line 1012 "parser.tab.cc" // lalr1.cc:859
+#line 1018 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 24:
 #line 97 "parser.yy" // lalr1.cc:859
     { sign = "menos";}
-#line 1018 "parser.tab.cc" // lalr1.cc:859
+#line 1024 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 25:
 #line 98 "parser.yy" // lalr1.cc:859
     { sign = "mas";}
-#line 1024 "parser.tab.cc" // lalr1.cc:859
+#line 1030 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 26:
 #line 100 "parser.yy" // lalr1.cc:859
     { path = yystack_[0].value.as< string > ();}
-#line 1030 "parser.tab.cc" // lalr1.cc:859
+#line 1036 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 27:
 #line 101 "parser.yy" // lalr1.cc:859
     { name = yystack_[0].value.as< string > ();}
-#line 1036 "parser.tab.cc" // lalr1.cc:859
+#line 1042 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 28:
 #line 103 "parser.yy" // lalr1.cc:859
     { path = yystack_[0].value.as< string > ();}
-#line 1042 "parser.tab.cc" // lalr1.cc:859
+#line 1048 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 29:
 #line 104 "parser.yy" // lalr1.cc:859
     { name = yystack_[0].value.as< string > ();}
-#line 1048 "parser.tab.cc" // lalr1.cc:859
+#line 1054 "parser.tab.cc" // lalr1.cc:859
     break;
 
   case 30:
 #line 105 "parser.yy" // lalr1.cc:859
     { id = yystack_[0].value.as< string > ();}
-#line 1054 "parser.tab.cc" // lalr1.cc:859
+#line 1060 "parser.tab.cc" // lalr1.cc:859
     break;
 
 
-#line 1058 "parser.tab.cc" // lalr1.cc:859
+#line 1064 "parser.tab.cc" // lalr1.cc:859
             default:
               break;
             }
@@ -1470,7 +1476,7 @@ namespace yy {
 
 #line 5 "parser.yy" // lalr1.cc:1167
 } // yy
-#line 1474 "parser.tab.cc" // lalr1.cc:1167
+#line 1480 "parser.tab.cc" // lalr1.cc:1167
 #line 107 "parser.yy" // lalr1.cc:1168
 
 
@@ -1478,3 +1484,31 @@ void yy::analizer_parser::error(const location_type& lugar, const std::string& l
 {
   std::cout << "Error Sintactico " << lexema << " var " << std::endl;
 }
+
+void analizer_driver::init_mount()
+{
+    init_mounts();
+}
+
+bool analizer_driver::get_bool_exec()
+{
+    if(exec == true)
+        return true;
+    else
+        return false;
+}
+
+string analizer_driver::get_path()
+{
+    if(path.compare("notdefined") != 0)
+        return path;
+    else
+        return "notdefined";
+}
+
+void analizer_driver::set_exec_bool()
+{
+    exec = false;
+}
+
+

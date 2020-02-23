@@ -8,9 +8,8 @@ int analizer_driver::parse(const std::string& archivo)
   yy::analizer_parser parser(*this);
   parser.set_debug_level(false);
   parser.parse();
-  //terminarScanner();
   return resultado;
 
-
 }
+
 

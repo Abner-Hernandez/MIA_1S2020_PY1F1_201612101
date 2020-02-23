@@ -12,6 +12,10 @@ public:
   float resultado;
   void iniciarScanner();
   void terminarScanner();
+  void init_mount();
+  bool get_bool_exec();
+  string get_path();
+  void set_exec_bool();
 
   int parse(const std::string& archivo);
   

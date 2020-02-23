@@ -71,11 +71,11 @@ INICIO : ADMINIST { std::cout << $1 << '\n';  };
 
 ADMINIST :  mkdisk MKPARM MKPARM MKPARM MKPARM                          { mkdisk();}
             |rmdisk path assign pather                                  { rmdisk();}
-            |fdisk FDISK FDISK FDISK FDISK FDISK FDISK FDISK           { fdisk();}
+            |fdisk FDISK FDISK FDISK FDISK FDISK FDISK FDISK            { fdisk();}
             |mount DMOUNT DMOUNT                                        { mount();}
             |unmount id assign idvda                                    { unmount();}
             |rep DREP DREP DREP                                         { rep();}
-            |exec path assign pather;
+            |exec path assign pather                                    { path = $4;};
 
 MKPARM :    size assign numero                                          { size = $3;}
             |fit assign adj                                             { fit = $3;}
@@ -110,3 +110,31 @@ void yy::analizer_parser::error(const location_type& lugar, const std::string& l
 {
   std::cout << "Error Sintactico " << lexema << " var " << std::endl;
 }
+
+void analizer_driver::init_mount()
+{
+    init_mounts();
+}
+
+bool analizer_driver::get_bool_exec()
+{
+    if(exec == true)
+        return true;
+    else
+        return false;
+}
+
+string analizer_driver::get_path()
+{
+    if(path.compare("notdefined") != 0)
+        return path;
+    else
+        return "notdefined";
+}
+
+void analizer_driver::set_exec_bool()
+{
+    exec = false;
+}
+
+
