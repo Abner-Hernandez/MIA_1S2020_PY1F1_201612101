@@ -76,7 +76,7 @@ void get_path_copy();
 void agregarAparticion(string path);
 void sort_array(Particion n[]);
 void setEBR(EBR& val);
-void setEBR(EBR& val,int start);
+void setEBR2(EBR& val,int start);
 void mount();
 void unmount();
 void unmount2();
@@ -95,6 +95,12 @@ int existepath();
 int pathvacio();
 void insertarP(Particion& part);
 void init_mounts();
+
+void verificar_comillas(string &cadena)
+{
+    if(cadena.at(0) == '"' )
+        cadena = cadena.substr(1, cadena.size() -2);
+}
 
 void default_vars()
 {
@@ -145,7 +151,7 @@ void crear_folder()
             FILE *f = fopen(path.substr(0, i).c_str(), "rb");
             if(f == NULL)
             {
-                string folder = "mkdir " + path.substr(0, i);
+                string folder = "mkdir '" + path.substr(0, i) + "'";
                 system(folder.c_str());
             }
         }
@@ -281,6 +287,8 @@ void fdisk()
         if(type == '*')
             type = 'p';
 
+        type = tolower(type);
+
         if(fit.compare("notdefined") == 0)
             fit = 'w';
 
@@ -294,6 +302,16 @@ void fdisk()
         }
         if(tdelete.compare("notdefined") != 0)
         {
+            printf("Desea Eliminar la particion %s en el disco %s\n Ingrese [s/n] :  ", name.c_str(),path.c_str());
+            char confirm = '*';
+            while(1)
+            {
+                confirm = char(getchar());
+                if(tolower(confirm) == 's')
+                    break;
+                if(tolower(confirm) == 'n')
+                    return;
+            }
             eliminarParticion(path);
             if(path_copy.compare("notdefined") != 0)
                 eliminarParticion(path_copy);
@@ -335,6 +353,7 @@ void fdisk()
                     if(arr.mbr_particion[ty].part_type == 'e')
                     {
                         tp = arr.mbr_particion[ty].part_fit;
+                        tp = tolower(tp);
                     }
                 }
                 if(tp == 'f')
@@ -380,7 +399,7 @@ void get_path_copy()
             return;
         }else if(path.substr(i,i+5) == ".disk")
         {
-            path_copy = path.substr(0,i) + "_copy.disk";
+            path_copy = path.substr(0,i) + "_ra1.disk";
             break;
         }
     }
@@ -579,16 +598,7 @@ void sort_array(Particion n[])
 
 void eliminarParticion(string path)
 {
-    printf("Desea Eliminar la particion %s en el disco %s\n Ingrese [s/n] :  ", name.c_str(),path.c_str());
-    char confirm = '*';
-    while(1)
-    {
-        confirm = char(getchar());
-        if(tolower(confirm) == 's')
-            break;
-        if(tolower(confirm) == 'n')
-            return;
-    }
+
     FILE* f = fopen(path.c_str(),"rb+");
     char exit = '*';
     if(f == NULL)
@@ -849,7 +859,6 @@ void insertarEBR(EBR& part)
             }
             mounts[e][l].type = 'l';
             mounts[e][0].montadas = mounts[e][0].montadas + 1;
-            //printf("%s\n",mounts[v][l].name)
             printf("Se monto la particion %s correctamente\n",name.c_str());
             return;
         }
@@ -1267,7 +1276,7 @@ void insertaParticion(string path)
                         if(type == 'e')
                         {
 
-                            setEBR2(aux,sizeof(arr));
+                            setEBR(aux);
                             fseek(f,sizeof(arr),SEEK_SET);
                             fwrite(&aux,sizeof(aux),1,f);
                         }
@@ -1296,7 +1305,7 @@ void insertaParticion(string path)
                                             setParticion(arr.mbr_particion[j],sizeof(arr));
                                             if(type == 'e')
                                             {
-                                                setEBR2(aux,sizeof(arr));
+                                                setEBR(aux);
                                                 fseek(f,sizeof(arr),SEEK_SET);
                                                 fwrite(&aux,sizeof(aux),1,f);
                                             }
@@ -1317,7 +1326,7 @@ void insertaParticion(string path)
                                     setParticion(arr.mbr_particion[i],arr.mbr_particion[i-1].part_start+arr.mbr_particion[i-1].part_size);
                                     if(type == 'e')
                                     {
-                                        setEBR2(aux,arr.mbr_particion[i-1].part_start+arr.mbr_particion[i-1].part_size);
+                                        setEBR(aux);
                                         fseek(f,arr.mbr_particion[i-1].part_start+arr.mbr_particion[i-1].part_size,SEEK_SET);
                                         fwrite(&aux,sizeof(aux),1,f);
                                     }
@@ -1339,7 +1348,7 @@ void insertaParticion(string path)
                                             setParticion(arr.mbr_particion[j],arr.mbr_particion[i-1].part_start+arr.mbr_particion[i-1].part_size);
                                             if(type == 'e')
                                             {
-                                                setEBR2(aux,arr.mbr_particion[i-1].part_start+arr.mbr_particion[i-1].part_size);
+                                                setEBR(aux);
                                                 fseek(f,arr.mbr_particion[i-1].part_start+arr.mbr_particion[i-1].part_size,SEEK_SET);
                                                 fwrite(&aux,sizeof(aux),1,f);
                                             }
@@ -1360,7 +1369,7 @@ void insertaParticion(string path)
                                 setParticion(arr.mbr_particion[i],arr.mbr_particion[i-1].part_start+arr.mbr_particion[i-1].part_size);
                                 if(type == 'e')
                                 {
-                                    setEBR2(aux,arr.mbr_particion[i-1].part_start+arr.mbr_particion[i-1].part_size);
+                                    setEBR(aux);
                                     fseek(f,arr.mbr_particion[i-1].part_start+arr.mbr_particion[i-1].part_size,SEEK_SET);
                                     fwrite(&aux,sizeof(aux),1,f);
                                 }
@@ -1464,7 +1473,7 @@ void insertaParticionMejor(string path)
                         if(type == 'e')
                         {
 
-                            setEBR2(aux,sizeof(arr));
+                            setEBR(aux);
                             fseek(f,sizeof(arr),SEEK_SET);
                             fwrite(&aux,sizeof(aux),1,f);
                         }
@@ -1521,7 +1530,7 @@ void insertaParticionMejor(string path)
             if(type == 'e')
             {
 
-                setEBR2(aux,propuesta);
+                setEBR(aux);
                 fseek(f,propuesta,SEEK_SET);
                 fwrite(&aux,sizeof(aux),1,f);
             }
@@ -1788,7 +1797,7 @@ void insertaParticionPeor(string path)
                         if(type == 'e')
                         {
 
-                            setEBR2(aux,sizeof(arr));
+                            setEBR(aux);
                             fseek(f,sizeof(arr),SEEK_SET);
                             fwrite(&aux,sizeof(aux),1,f);
                         }
@@ -1845,7 +1854,7 @@ void insertaParticionPeor(string path)
             if(type == 'e')
             {
 
-                setEBR2(aux,propuesta);
+                setEBR(aux);
                 fseek(f,propuesta,SEEK_SET);
                 fwrite(&aux,sizeof(aux),1,f);
             }
@@ -2090,6 +2099,7 @@ void mbr_graph()
                     fseek(file,0,SEEK_SET);
                     fread(&auxM,sizeof(auxM),1,file);
                     txt_file += "digraph G {\r\n node[shape = \"textplain\" ]; \r\n s[ label=<<table border=\"0\" cellborder=\"1\" cellspacing=\"0\"><tr><td colspan= '2'><b>Tabla de MBR</b></td></tr>\r\n<tr><td><b>Nombre</b></td><td>Valor</td></tr>\r\n";
+                    txt_file += "<tr><td><b>mbr_fit</b></td><td>" + string(1,auxM.disk_fit) + "</td></tr>\r\n";
                     txt_file += "<tr><td><b>mbr_disk_signature</b></td><td>" + to_string(auxM.mbr_disk_signature) + "</td></tr>\r\n";
                     txt_file += "<tr><td><b>mbr_fecha_creacion</b></td><td>" + string(auxM.mbr_fecha_creacion) + "</td></tr>\r\n";
                     txt_file += "<tr><td><b>mbr_tamanio</b></td><td>" + to_string(auxM.mbr_tam) + "</td></tr>\r\n";
@@ -2118,7 +2128,7 @@ void mbr_graph()
                             while(auxE.part_next != -1)
                             {
                                 nn++;
-                                txt_file += "<tr><td><b>Particion logica " + to_string(nn) + "</b></td></tr>\r\n";
+                                txt_file += "<tr><td colspan= '2'><b>Particion logica " + to_string(nn) + "</b></td></tr>\r\n";
                                 txt_file += "<tr><td><b>part_fit</b></td><td>" + string(1, auxE.part_fit) + "</td></tr>\r\n";
                                 txt_file += "<tr><td><b>part_name</b></td><td>" + string(auxE.part_name) + "</td></tr>\r\n";
                                 txt_file += "<tr><td><b>part_size</b></td><td>" + to_string(auxE.part_size) + "</td></tr>\r\n";
@@ -2131,7 +2141,7 @@ void mbr_graph()
                             if(auxE.part_size != -1)
                             {
                                 nn++;
-                                txt_file += "<tr><td><b>Particion logica " + to_string(nn +1) + "</b></td></tr>\r\n";
+                                txt_file += "<tr><td colspan= '2'><b>Particion logica " + to_string(nn +1) + "</b></td></tr>\r\n";
                                 txt_file += "<tr><td><b>part_fit</b></td><td>" + string(1, auxE.part_fit) + "</td></tr>\r\n";
                                 txt_file += "<tr><td><b>part_name</b></td><td>" + string(auxE.part_name) + "</td></tr>\r\n";
                                 txt_file += "<tr><td><b>part_size</b></td><td>" + to_string(auxE.part_size) + "</td></tr>\r\n";
@@ -2200,7 +2210,7 @@ void disk_graph()
                                 {
                                     result = (float) ((auxM.mbr_particion[ss].part_start - sizeof(auxM))*100)/ (float) auxM.mbr_tam;
                                     int tmAux = auxM.mbr_particion[ss].part_start - sizeof(auxM);
-                                    txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(result) + " %% libre<br></br> " + to_string(tmAux) + " Bytes</td>";
+                                    txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(floorf(result * 100) / 100)  + " %% libre<br></br> " + to_string(tmAux) + " Bytes</td>";
                                 }
                                 fseek(file,auxM.mbr_particion[ss].part_start,SEEK_SET);
                                 fread(&auxE,sizeof(auxE),1,file);
@@ -2214,11 +2224,11 @@ void disk_graph()
                                         if(auxE.part_start -(ant+si) >0)
                                         {
                                             result = (float)((auxE.part_start -(ant+si))*100)/ (float)auxM.mbr_tam;
-                                            txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(result) + " %% libre<br></br> " + to_string(auxE.part_start -(ant+si))+ "Bytes</td>";
+                                            txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(floorf(result * 100) / 100) + " %% libre<br></br> " + to_string(auxE.part_start -(ant+si))+ "Bytes</td>";
                                         }
                                         txt_file += "<td colspan= \"100\">EBR</td>";
                                         result = (float) ((auxE.part_size)*100)/ (float) auxM.mbr_tam;
-                                        txt_file += "<td colspan= \"100\">Logica " +string(auxE.part_name) + "<br></br>" + to_string(result) + " %% ocupado<br></br> " + to_string(auxE.part_size) + " Bytes</td>";
+                                        txt_file += "<td colspan= \"100\">Logica " +string(auxE.part_name) + "<br></br>" + to_string(floorf(result * 100) / 100) + " %% ocupado<br></br> " + to_string(auxE.part_size) + " Bytes</td>";
                                         ant = auxE.part_start;
                                         si = auxE.part_size;
                                     }
@@ -2231,22 +2241,22 @@ void disk_graph()
                                     if(auxE.part_start -(ant+si) >0)
                                     {
                                         result = (float)((auxE.part_start -(ant+si))*100)/ (float)auxM.mbr_tam;
-                                        txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(result) + " %% libre<br></br> " + to_string(auxE.part_start -(ant+si)) + " Bytes</td>";
+                                        txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(floorf(result * 100) / 100) + " %% libre<br></br> " + to_string(auxE.part_start -(ant+si)) + " Bytes</td>";
                                     }
                                     txt_file += "<td colspan= \"100\">EBR</td>";
                                     result = (float) ((auxE.part_size)*100)/ (float) auxM.mbr_tam;
-                                    txt_file += "<td colspan= \"100\">Logica " + string(auxE.part_name) + "<br></br>%" + to_string(result) + "%% ocupado<br></br> " + to_string(auxE.part_size) + " Bytes</td>";
+                                    txt_file += "<td colspan= \"100\">Logica " + string(auxE.part_name) + "<br></br>%" + to_string(floorf(result * 100) / 100) + "%% ocupado<br></br> " + to_string(auxE.part_size) + " Bytes</td>";
                                 }
                                 if(auxE.part_size == -1 && auxE.part_start == -1)
                                 {
                                     result = (float) (((auxM.mbr_particion[ss].part_size))*100)/ (float) auxM.mbr_tam;
-                                    txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(result) + " %% libre<br></br> " + to_string(auxM.mbr_particion[ss].part_size) + " Bytes</td>";
+                                    txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(floorf(result * 100) / 100) + " %% libre<br></br> " + to_string(auxM.mbr_particion[ss].part_size) + " Bytes</td>";
                                 }else
                                 {
                                     if((auxM.mbr_particion[ss].part_start+auxM.mbr_particion[ss].part_size) - (auxE.part_start+auxE.part_size) >0)
                                     {
                                         result = (float) (((auxM.mbr_particion[ss].part_start+auxM.mbr_particion[ss].part_size) - (auxE.part_start+auxE.part_size))*100)/ (float) auxM.mbr_tam;
-                                        txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(result) + " %% libre<br></br> " + to_string((auxM.mbr_particion[ss].part_start+auxM.mbr_particion[ss].part_size) - (auxE.part_start+auxE.part_size)) +" Bytes</td>";
+                                        txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(floorf(result * 100) / 100) + " %% libre<br></br> " + to_string((auxM.mbr_particion[ss].part_start+auxM.mbr_particion[ss].part_size) - (auxE.part_start+auxE.part_size)) +" Bytes</td>";
                                     }
                                 }
                                 txt_file += "</tr></table></td>";
@@ -2270,7 +2280,7 @@ void disk_graph()
                                 {
                                     int tmAux = auxM.mbr_particion[ss].part_start - sizeof(auxM);
                                     result = (float) ((auxM.mbr_particion[ss].part_start - sizeof(auxM))*100)/ (float) auxM.mbr_tam;
-                                    txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(result) + " %% libre<br></br> " + to_string(tmAux) + " Bytes</td>";
+                                    txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(floorf(result * 100) / 100) + " %% libre<br></br> " + to_string(tmAux) + " Bytes</td>";
                                 }
                                 if(auxM.mbr_particion[ss].part_size != 2147483647)
                                 {
@@ -2283,7 +2293,7 @@ void disk_graph()
                                         txt_file += "Extendida " + string(auxM.mbr_particion[ss].part_name);
                                     }
                                     result = (float) ((auxM.mbr_particion[ss].part_size)*100)/ (float) auxM.mbr_tam;
-                                    txt_file += "<br></br>" + to_string(result) + " %% ocupado<br></br> " + to_string(auxM.mbr_particion[ss].part_size) + " Bytes</td>";
+                                    txt_file += "<br></br>" + to_string(floorf(result * 100) / 100) + " %% ocupado<br></br> " + to_string(auxM.mbr_particion[ss].part_size) + " Bytes</td>";
                                 }
                             }
                         }else
@@ -2297,7 +2307,7 @@ void disk_graph()
                                 if(auxM.mbr_particion[ss].part_start - (auxM.mbr_particion[ss-1].part_start +auxM.mbr_particion[ss-1].part_size) > 0)
                                 {
                                     result = (float) ((auxM.mbr_particion[ss].part_start - (auxM.mbr_particion[ss-1].part_start +auxM.mbr_particion[ss-1].part_size))*100)/ (float) auxM.mbr_tam;
-                                    txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(result) + " %% libre<br></br> " + to_string(auxM.mbr_particion[ss].part_start - (auxM.mbr_particion[ss-1].part_start +auxM.mbr_particion[ss-1].part_size)) +" Bytes</td>";
+                                    txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(floorf(result * 100) / 100) + " %% libre<br></br> " + to_string(auxM.mbr_particion[ss].part_start - (auxM.mbr_particion[ss-1].part_start +auxM.mbr_particion[ss-1].part_size)) +" Bytes</td>";
                                 }
                                 fseek(file,auxM.mbr_particion[ss].part_start,SEEK_SET);
                                 fread(&auxE,sizeof(auxE),1,file);
@@ -2311,11 +2321,11 @@ void disk_graph()
                                         if(auxE.part_start -(ant+si) >0)
                                         {
                                             result = (float)((auxE.part_start -(ant+si))*100)/ (float)auxM.mbr_tam;
-                                            txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(result) + " %% libre<br></br> " + to_string(auxE.part_start -(ant+si)) + " Bytes</td>";
+                                            txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(floorf(result * 100) / 100) + " %% libre<br></br> " + to_string(auxE.part_start -(ant+si)) + " Bytes</td>";
                                         }
                                         txt_file += "<td colspan= \"100\">EBR</td>";
                                         result = (float) ((auxE.part_size)*100)/ (float) auxM.mbr_tam;
-                                        txt_file += "<td colspan= \"100\">Logica " + string(auxE.part_name) + "<br></br>" + to_string(result) +" %% ocupado<br></br> " + to_string(auxE.part_size) +" Bytes</td>";
+                                        txt_file += "<td colspan= \"100\">Logica " + string(auxE.part_name) + "<br></br>" + to_string(floorf(result * 100) / 100) +" %% ocupado<br></br> " + to_string(auxE.part_size) +" Bytes</td>";
                                         ant = auxE.part_start;
                                         si = auxE.part_size;
                                     }
@@ -2328,11 +2338,11 @@ void disk_graph()
                                     if(auxE.part_start -(ant+si) >0)
                                     {
                                         result = (float)((auxE.part_start -(ant+si))*100)/ (float)auxM.mbr_tam;
-                                        txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(result) + " %% libre<br></br> " + to_string(auxE.part_start -(ant+si)) + " Bytes</td>";
+                                        txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(floorf(result * 100) / 100) + " %% libre<br></br> " + to_string(auxE.part_start -(ant+si)) + " Bytes</td>";
                                     }
                                     txt_file += "<td colspan= \"100\">EBR</td>";
                                     result = (float) ((auxE.part_size)*100)/ (float) auxM.mbr_tam;
-                                    txt_file += "<td colspan= \"100\">Logica " + string(auxE.part_name) +"<br></br>" + to_string(result) +" %% ocupado<br></br> " + to_string(auxE.part_size) + " Bytes</td>";
+                                    txt_file += "<td colspan= \"100\">Logica " + string(auxE.part_name) +"<br></br>" + to_string(floorf(result * 100) / 100) +" %% ocupado<br></br> " + to_string(auxE.part_size) + " Bytes</td>";
                                 }
                                 if(auxE.part_size == -1 && auxE.part_start == -1)
                                 {
@@ -2343,7 +2353,7 @@ void disk_graph()
                                     if((auxM.mbr_particion[ss].part_start+auxM.mbr_particion[ss].part_size) - (auxE.part_start+auxE.part_size) >0)
                                     {
                                         result = (float) (((auxM.mbr_particion[ss].part_start+auxM.mbr_particion[ss].part_size) - (auxE.part_start+auxE.part_size))*100)/ (float) auxM.mbr_tam;
-                                        txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(result) + " %% libre<br></br> " + to_string(auxM.mbr_particion[ss].part_start+(auxM.mbr_particion[ss].part_start+auxM.mbr_particion[ss].part_size) - (auxE.part_start+auxE.part_size)) + " Bytes</td>";
+                                        txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(floorf(result * 100) / 100) + " %% libre<br></br> " + to_string(auxM.mbr_particion[ss].part_start+(auxM.mbr_particion[ss].part_start+auxM.mbr_particion[ss].part_size) - (auxE.part_start+auxE.part_size)) + " Bytes</td>";
                                     }
                                 }
 
@@ -2353,7 +2363,7 @@ void disk_graph()
                             if(auxM.mbr_particion[ss].part_start - (auxM.mbr_particion[ss-1].part_start + auxM.mbr_particion[ss-1].part_size) > 0)
                             {
                                 result = (float) ((auxM.mbr_particion[ss].part_start - (auxM.mbr_particion[ss-1].part_start + auxM.mbr_particion[ss-1].part_size))*100)/ (float) auxM.mbr_tam;
-                                txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(result) + " %% libre<br></br> " + to_string(auxM.mbr_particion[ss].part_start - (auxM.mbr_particion[ss-1].part_start + auxM.mbr_particion[ss-1].part_size)) + " Bytes</td>";
+                                txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(floorf(result * 100) / 100) + " %% libre<br></br> " + to_string(auxM.mbr_particion[ss].part_start - (auxM.mbr_particion[ss-1].part_start + auxM.mbr_particion[ss-1].part_size)) + " Bytes</td>";
                             }
                             if(auxM.mbr_particion[ss].part_size != 2147483647)
                             {
@@ -2366,7 +2376,7 @@ void disk_graph()
                                     txt_file += "Extendida %s" + string(auxM.mbr_particion[ss].part_name);
                                 }
                                 result = (float) ((auxM.mbr_particion[ss].part_size)*100)/ (float) auxM.mbr_tam;
-                                 txt_file += "<br></br>" + to_string(result) + " %% ocupado<br></br> " + to_string(auxM.mbr_particion[ss].part_size) + " Bytes</td>";
+                                 txt_file += "<br></br>" + to_string(floorf(result * 100) / 100) + " %% ocupado<br></br> " + to_string(auxM.mbr_particion[ss].part_size) + " Bytes</td>";
                             }
                         }
                     }
@@ -2376,7 +2386,7 @@ void disk_graph()
                         result = (float) auxM.mbr_tam - (auxM.mbr_particion[ss-1].part_start+auxM.mbr_particion[ss-1].part_size);
                         result = (float) result * 100;
                         result = (float) result/ (float) auxM.mbr_tam;
-                        txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(result) + " %% libre<br></br> " + to_string(auxM.mbr_tam - (auxM.mbr_particion[ss-1].part_start+auxM.mbr_particion[ss-1].part_size)) + " Bytes</td>";
+                        txt_file += "<td colspan= \"100\">Libre<br></br>" + to_string(floorf(result * 100) / 100) + " %% libre<br></br> " + to_string(auxM.mbr_tam - (auxM.mbr_particion[ss-1].part_start+auxM.mbr_particion[ss-1].part_size)) + " Bytes</td>";
                     }
 
                     txt_file += "</tr></table>>];}";

@@ -16,7 +16,7 @@ int main()
     while (true) {
 
         getline(cin, entry);
-        if(entry.compare("exit") != 0)
+        if(entry.compare("exit") != 0 && entry.compare("") != 0)
         {
             if(driver.parse(entry)){
               printf("La entrada es incorrecta\n");
@@ -39,7 +39,7 @@ int main()
                 }
               printf("La entrada es correcta\n");
             }
-        }else
+        }else if(entry.compare("exit") == 0)
             break;
     }
 

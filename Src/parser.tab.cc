@@ -889,7 +889,7 @@ namespace yy {
 
   case 4:
 #line 72 "parser.yy" // lalr1.cc:859
-    { rmdisk();}
+    { path = yystack_[0].value.as< string > (); verificar_comillas(path); rmdisk();}
 #line 894 "parser.tab.cc" // lalr1.cc:859
     break;
 
@@ -907,7 +907,7 @@ namespace yy {
 
   case 7:
 #line 75 "parser.yy" // lalr1.cc:859
-    { unmount();}
+    { id = yystack_[0].value.as< string > (); unmount();}
 #line 912 "parser.tab.cc" // lalr1.cc:859
     break;
 
@@ -919,7 +919,7 @@ namespace yy {
 
   case 9:
 #line 77 "parser.yy" // lalr1.cc:859
-    { path = yystack_[0].value.as< string > (); exec = true;}
+    { path = yystack_[0].value.as< string > (); verificar_comillas(path); exec = true;}
 #line 924 "parser.tab.cc" // lalr1.cc:859
     break;
 
@@ -943,7 +943,7 @@ namespace yy {
 
   case 13:
 #line 82 "parser.yy" // lalr1.cc:859
-    { path = yystack_[0].value.as< string > ();}
+    { path = yystack_[0].value.as< string > (); verificar_comillas(path);}
 #line 948 "parser.tab.cc" // lalr1.cc:859
     break;
 
@@ -973,7 +973,7 @@ namespace yy {
 
   case 18:
 #line 88 "parser.yy" // lalr1.cc:859
-    { path = yystack_[0].value.as< string > ();}
+    { path = yystack_[0].value.as< string > (); verificar_comillas(path);}
 #line 978 "parser.tab.cc" // lalr1.cc:859
     break;
 
@@ -1021,7 +1021,7 @@ namespace yy {
 
   case 26:
 #line 99 "parser.yy" // lalr1.cc:859
-    { path = yystack_[0].value.as< string > ();}
+    { path = yystack_[0].value.as< string > (); verificar_comillas(path);}
 #line 1026 "parser.tab.cc" // lalr1.cc:859
     break;
 
@@ -1033,7 +1033,7 @@ namespace yy {
 
   case 28:
 #line 102 "parser.yy" // lalr1.cc:859
-    { path = yystack_[0].value.as< string > ();}
+    { path = yystack_[0].value.as< string > (); verificar_comillas(path);}
 #line 1038 "parser.tab.cc" // lalr1.cc:859
     break;
 

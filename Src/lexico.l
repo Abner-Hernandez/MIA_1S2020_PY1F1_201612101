@@ -17,12 +17,14 @@ UNITD ("m"|"k")
 ADJ ("BF"|"FF"|"WF")
 TYPEP ("P"|"E"|"L")
 TPDELETE ("FAST"|"FULL")
-COMENTARIO "/*"[^'*']*"*/"
 
 PATHER [\"]?([/][^/]+)+"."{LETRA}+[\"]?
 VDA ["vd"]{LETRA}{DIGITO}
 PARTNAME [\"]?({LETRA}|{DIGITO})*[\"]?
 NUMERO {DIGITO}+
+COMENTARIOM "/*"[^'*']*"*/"
+COMENTARIOL "#"[^*\n]*
+COMENTARIOLL "//"[^*\n]*
 
 DELIMITADOR [ \t\r\f\n]+
 %%
@@ -55,6 +57,10 @@ DELIMITADOR [ \t\r\f\n]+
 {PARTNAME}      {return yy::analizer_parser::make_npart(yytext, loc);}
 
 {DELIMITADOR}   {}
+{COMENTARIOM}   {}
+{COMENTARIOL}   {}
+{COMENTARIOLL}   {}
+
 .               {printf("ERROR LEXICO %s\n",yytext);}
 <<EOF>>		{return yy::analizer_parser::make_FIN(loc);}
 %%

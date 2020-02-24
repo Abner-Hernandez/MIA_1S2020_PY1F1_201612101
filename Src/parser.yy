@@ -69,23 +69,23 @@ class analizer_driver;
 INICIO : ADMINIST { std::cout << $1 << '\n';  };
 
 ADMINIST :  mkdisk MKPARM MKPARM MKPARM MKPARM                          { mkdisk();}
-            |rmdisk path assign pather                                  { rmdisk();}
+            |rmdisk path assign pather                                  { path = $4; verificar_comillas(path); rmdisk();}
             |fdisk FDISK FDISK FDISK FDISK FDISK FDISK FDISK            { fdisk();}
             |mount DMOUNT DMOUNT                                        { mount();}
-            |unmount id assign idvda                                    { unmount();}
+            |unmount id assign idvda                                    { id = $4; unmount();}
             |rep DREP DREP DREP                                         { rep();}
-            |exec pather                                                { path = $2; exec = true;};
+            |exec pather                                                { path = $2; verificar_comillas(path); exec = true;};
 
 MKPARM :    size assign numero                                          { size = $3;}
             |fit assign adj                                             { fit = $3;}
             |unit assign unitl                                          { unit = $3;}
-            |path assign pather                                         { path = $3;}
+            |path assign pather                                         { path = $3; verificar_comillas(path);}
             |%empty                                                     { $$ = "empty";};
 
 FDISK :     size assign numero                                          { size = $3;}
             |fit assign adj                                             { fit = $3;}
             |unit assign unitl                                          { unit = $3;}
-            |path assign pather                                         { path = $3;}
+            |path assign pather                                         { path = $3; verificar_comillas(path);}
             |typer assign typep                                         { type = $3;}
             |deleter assign tpdelete                                    { tdelete = $3;}
             |add assign SIMBOL numero                                   { add = $4;}
@@ -96,10 +96,10 @@ FDISK :     size assign numero                                          { size =
 SIMBOL :    minus                                                       { sign = "menos";}
             |%empty                                                     { sign = "mas";};
 
-DMOUNT :    path assign pather                                          { path = $3;}
+DMOUNT :    path assign pather                                          { path = $3; verificar_comillas(path);}
             |name assign npart                                          { name = $3;};
 
-DREP :      path assign pather                                          { path = $3;}
+DREP :      path assign pather                                          { path = $3; verificar_comillas(path);}
             |name assign npart                                          { name = $3;}
             |id assign idvda                                            { id = $3;};
 
